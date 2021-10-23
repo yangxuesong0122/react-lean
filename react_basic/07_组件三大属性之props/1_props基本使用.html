@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>1_props基本使用</title>
+</head>
+<body>
+<!--创建一个容器-->
+<div id="test"></div>
+<div id="test1"></div>
+
+<!--引入react核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--引入react-dom,用于支持react操作dom-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--引入babel,用于将jsx转为js-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+
+<script type="text/babel">
+  class Person extends React.Component {
+    // 初始化状态
+    state = {
+    }
+
+    render() {
+      console.log(this)
+      const { name, age, sex } = this.props
+      return (
+        <ul>
+          <li>{name}</li>
+          <li>{age}</li>
+          <li>{sex}</li>
+        </ul>
+      )
+    }
+  }
+
+  ReactDOM.render(<Person name="yxs" age="18" sex="男"/>, document.getElementById('test'))
+  const p ={
+    name: '老杨',
+    age: 54,
+    sex: '男'
+  }
+  // ReactDOM.render(<Person name={p.name} age={p.age} sex={p.sex}/>, document.getElementById('test1'))
+  ReactDOM.render(<Person {...p}/>, document.getElementById('test1'))
+</script>
+</body>
+</html>
