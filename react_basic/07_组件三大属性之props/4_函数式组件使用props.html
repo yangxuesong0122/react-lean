@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>4_函数式组件使用props</title>
+</head>
+<body>
+<!--创建一个容器-->
+<div id="test"></div>
+<div id="test1"></div>
+
+<!--引入react核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--引入react-dom,用于支持react操作dom-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--引入babel,用于将jsx转为js-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<!--引入prop-types,用于对组件标签属性进行限制-->
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<script type="text/babel">
+  // class Person extends React.Component {
+  //   // 对标签属性进行类型/必要性限制
+  //   static propTypes = {
+  //     name: PropTypes.string.isRequired,
+  //     sex: PropTypes.string,
+  //     age: PropTypes.number,
+  //     speak: PropTypes.func
+  //   }
+  //   // 指定默认标签属性值
+  //   static defaultProps = {
+  //     sex: '不男不女',
+  //     age: 18
+  //   }
+  //
+  //   render() {
+  //     console.log(this)
+  //     const { name, age, sex } = this.props
+  //     // props是只读的
+  //     // this.props.name = 'aaa' // 报错
+  //     return (
+  //       <ul>
+  //         <li>{name}</li>
+  //         <li>{age}</li>
+  //         <li>{sex}</li>
+  //       </ul>
+  //     )
+  //   }
+  // }
+
+  function Person(props) {
+    const { name, age, sex } = props
+    return (
+      <ul>
+        <li>{name}</li>
+        <li>{age}</li>
+        <li>{sex}</li>
+      </ul>
+    )
+  }
+  Person.propTypes = {
+    name: PropTypes.string.isRequired,
+    sex: PropTypes.string,
+    age: PropTypes.number,
+    speak: PropTypes.func
+  }
+  // 指定默认标签属性值
+  Person.defaultProps = {
+    sex: '不男不女',
+    age: 18
+  }
+
+  ReactDOM.render(<Person name="yxs" age={18} sex="男"/>, document.getElementById('test'))
+</script>
+</body>
+</html>
