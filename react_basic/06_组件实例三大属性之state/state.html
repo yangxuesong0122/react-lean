@@ -19,21 +19,24 @@
   // 1. 创建类式组件
   class Weather extends React.Component {
     // 构造器中的 this 是组件实例对象
+    // 构造器调用几次 --- 1次
     constructor(props) {
       super(props)
       // 初始化状态
       this.state = {
-        isHot: false
+        isHot: false,
+        wind: '微风'
       }
       // 执行完这行代码后，实例对象身上就多了一个 changeWeather 方法
       this.changeWeather = this.changeWeather.bind(this)
     }
     // 通过实例调用到原型上的 render 方法
+    // render调用几次 --- 1+n 次    1 是初始化那次  n 是状态更新的次数
     render() {
       // 读取状态
-      const {isHot} = this.state
+      const {isHot, wind} = this.state
       return (
-        <h2 onClick={this.changeWeather}>今天天气很{isHot ? '炎热' : '凉爽'}</h2>
+        <h2 onClick={this.changeWeather}>今天天气很{isHot ? '炎热' : '凉爽'}，有{wind}</h2>
       )
     }
 
@@ -41,7 +44,16 @@
     changeWeather() {
       // 由于 changeWeather 是作为 onclick 的回调，所以不是通过实例调用的，是直接调用的，
       // 类中的方法默认开启了局部的严格模式，所以 changeWeather 中的 this 为 undefined
-      console.log(this) // undefined
+      // console.log(this) // undefined
+
+      // 注意：state 不可直接更改，要借助内置的API去更改
+      // this.state.isHot = !this.state.isHot
+
+      // 必须通过 setState 去更新，且更新是合并，不是替换
+      this.setState({
+        isHot: !this.state.isHot
+      })
+      console.log(this.state.isHot)
     }
   }
 
