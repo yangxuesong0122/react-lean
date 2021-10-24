@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>1_引出生命周期</title>
+</head>
+<body>
+<!--创建一个容器-->
+<div id="test"></div>
+<div id="test1"></div>
+
+<!--引入react核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--引入react-dom,用于支持react操作dom-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--引入babel,用于将jsx转为js-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<!--引入prop-types,用于对组件标签属性进行限制-->
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<script type="text/babel">
+  // 创建组件
+  class Life extends React.Component {
+    state = {
+      opacity: 1
+    }
+    // action = () => {
+    //   setInterval(() => {
+    //     let {opacity} = this.state
+    //     opacity -= 0.1
+    //     if (opacity <= 0) opacity =1
+    //     this.setState({
+    //       opacity
+    //     })
+    //   }, 200)
+    // }
+    toDeath = () => {
+      // 清除定时器
+      // clearInterval(this.timer)
+      // 卸载组件
+      ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+    }
+    // 组件挂载完毕调用
+    componentDidMount() {
+      console.log('组件挂载')
+      this.timer = setInterval(() => {
+        let {opacity} = this.state
+        opacity -= 0.1
+        if (opacity <= 0) opacity =1
+        this.setState({
+          opacity
+        })
+      }, 200)
+    }
+    componentWillUnmount() {
+      console.log('@')
+      clearInterval(this.timer)
+    }
+    // 初始化渲染，装填更新之后调用
+    render() {
+      console.log('render')
+      return (
+        <div>
+          <h2 style={{opacity: this.state.opacity}}>react 真的好难，杨雪松学不会</h2>
+          <button onClick={this.toDeath}>不活了</button>
+          {/*<button onClick={this.action}>开始变化</button>*/}
+        </div>
+      )
+    }
+  }
+
+  ReactDOM.render(<Life/>, document.getElementById('test'))
+</script>
+</body>
+</html>

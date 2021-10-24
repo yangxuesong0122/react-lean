@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>2_react生命周期(旧)</title>
+</head>
+<body>
+<!--创建一个容器-->
+<div id="test"></div>
+<div id="test1"></div>
+
+<!--引入react核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--引入react-dom,用于支持react操作dom-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--引入babel,用于将jsx转为js-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<!--引入prop-types,用于对组件标签属性进行限制-->
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<script type="text/babel">
+  // 创建组件
+  class Count extends React.Component {
+    constructor(props) {
+      console.log('count-counstructor')
+      super(props)
+      this.state = {
+        count: 0
+      }
+    }
+    add = () => {
+      let {count} = this.state
+      count += 1
+      this.setState({
+        count
+      })
+    }
+    handleUnmount = () => {
+      ReactDOM.unmountComponentAtNode(document.getElementById('test'))
+    }
+    // 强制更新
+    handleForce = () => {
+      this.forceUpdate()
+    }
+    componentWillMount() {
+      console.log('count-componentWillMount')
+    }
+    // 组件挂载完毕调用
+    componentDidMount() {
+      console.log('count-componentDidMount')
+    }
+    // 组件将要挂载
+    componentWillUnmount() {
+      console.log('count-componentWillUnmount')
+    }
+    // 控制组件更新的阀门
+    shouldComponentUpdate() {
+      console.log('count-shouldComponentUpdate')
+      return true
+    }
+    // 组件将要更新
+    componentWillUpdate() {
+      console.log('count-componentWillUpdate')
+    }
+    // 组件更新完毕
+    componentDidUpdate() {
+      console.log('count-componentDidUpdate')
+    }
+    // 初始化渲染，装填更新之后调用
+    render() {
+      console.log('render')
+      const {count} = this.state
+      return (
+        <div>
+          <h2>当前求和为{count}</h2>
+          <button onClick={this.add}>点我+1</button>
+          <button onClick={this.handleUnmount}>卸载组件</button>
+          <button onClick={this.handleForce}>强制更新</button>
+        </div>
+      )
+    }
+  }
+
+  ReactDOM.render(<Count/>, document.getElementById('test'))
+</script>
+</body>
+</html>
