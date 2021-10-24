@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>2_受控组件</title>
+</head>
+<body>
+<!--创建一个容器-->
+<div id="test"></div>
+<div id="test1"></div>
+
+<!--引入react核心库-->
+<script type="text/javascript" src="../js/react.development.js"></script>
+<!--引入react-dom,用于支持react操作dom-->
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<!--引入babel,用于将jsx转为js-->
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<!--引入prop-types,用于对组件标签属性进行限制-->
+<script type="text/javascript" src="../js/prop-types.js"></script>
+
+<script type="text/babel">
+  // 随着输入，维护状态就是受控   建议写受控组件
+
+  // 创建组件
+  class Login extends React.Component {
+    // 初始化状态
+    state = {
+      userName: '',
+      passwd: ''
+    }
+    saveUserName = (e) => {
+      this.setState({
+        userName: e.target.value
+      })
+    }
+    savePasswd = (e) => {
+      this.setState({
+        passwd: e.target.value
+      })
+    }
+    handleSubmit = (e) => {
+      e.preventDefault() // 阻止表单提交
+      const {userName, passwd} = this.state
+      alert(`名字是${userName},密码是${passwd}`)
+    }
+
+    render() {
+      return (
+        <form onSubmit={this.handleSubmit}>
+          用户名：<input onChange={this.saveUserName} type="text" placeholder="请输入用户名" name="userName"/>
+          密码：<input onChange={this.savePasswd} type="text" placeholder="请输入密码" name="password"/>
+          <button>登录</button>
+        </form>
+      )
+    }
+  }
+
+  ReactDOM.render(<Login/>, document.getElementById('test'))
+</script>
+</body>
+</html>
