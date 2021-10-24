@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>4_getSnapshotBeforeUpdate使用场景</title>
+  <style>
+    .list {
+      width: 200px;
+      height: 150px;
+      background-color: aqua;
+      overflow: auto;
+    }
+    .news {
+      height: 30px;
+    }
+  </style>
+</head>
+<body>
+<!--创建一个容器-->
+<div id="test"></div>
+
+<!--引入react核心库-->
+<script type="text/javascript" src="../js/react-17.0.1/react.development.js"></script>
+<!--引入react-dom,用于支持react操作dom-->
+<script type="text/javascript" src="../js/react-17.0.1/react-dom.development.js"></script>
+<!--引入babel,用于将jsx转为js-->
+<script type="text/javascript" src="../js/react-17.0.1/babel.min.js"></script>
+<!--引入prop-types,用于对组件标签属性进行限制-->
+<script type="text/javascript" src="../js/react-17.0.1/prop-types.js"></script>
+
+<script type="text/babel">
+  /*
+  * 1. 初始化阶段: 由ReactDOM.render()触发---初次渲染
+        1.constructor()
+        2.getDerivedStateFromProps
+        3.render()
+        4.componentDidMount()
+	  2. 更新阶段: 由组件内部this.setSate()或父组件重新render触发
+        1.getDerivedStateFromProps
+        2.shouldComponentUpdate()
+        3.render()
+        4.getSnapshotBeforeUpdate
+        5.componentDidUpdate()
+	  3. 卸载组件: 由ReactDOM.unmountComponentAtNode()触发
+        1.componentWillUnmount()
+
+     重要的勾子
+        1.render：初始化渲染或更新渲染调用
+        2.componentDidMount：开启监听, 发送ajax请求
+        3.componentWillUnmount：做一些收尾工作, 如: 清理定时器
+  * */
+
+  // 创建组件
+  class NewsList extends React.Component {
+    state = {
+      news: []
+    }
+    componentDidMount() {
+      setInterval(() => {
+        // 获取原状态
+        const {news} = this.state
+        // 模拟一条新闻
+        const newsStr = '新闻' + (news.length + 1)
+        this.setState({
+          news: [newsStr, ...news]
+        })
+        console.log('scrollTop', this.refs.list.scrollTop)
+        console.log('scrollHeight', this.refs.list.scrollHeight)
+      }, 1000)
+    }
+    // 在更新之前获取快照
+    getSnapshotBeforeUpdate() {
+      return this.refs.list.scrollHeight
+    }
+    // 组件更新完毕
+    componentDidUpdate(preProps, preState, height) {
+      // console.log('componentDidUpdate', preProps, preState, height)
+      this.refs.list.scrollTop += this.refs.list.scrollHeight - height
+    }
+    // 初始化渲染，装填更新之后调用
+    render() {
+      // console.log('render')
+      return (
+        <div className="list" ref="list">
+          {
+            this.state.news.map(n => {
+              return <div className="news" key={n}>{n}</div>
+            })
+          }
+        </div>
+      )
+    }
+  }
+
+  ReactDOM.render(<NewsList/>, document.getElementById('test'))
+</script>
+</body>
+</html>
