@@ -2,43 +2,25 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>2_react生命周期(旧)</title>
+  <title>2_react生命周期(新)</title>
 </head>
 <body>
 <!--创建一个容器-->
 <div id="test"></div>
-<div id="test1"></div>
 
 <!--引入react核心库-->
-<script type="text/javascript" src="../js/react.development.js"></script>
+<script type="text/javascript" src="../js/react-17.0.1/react.development.js"></script>
 <!--引入react-dom,用于支持react操作dom-->
-<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/react-17.0.1/react-dom.development.js"></script>
 <!--引入babel,用于将jsx转为js-->
-<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/javascript" src="../js/react-17.0.1/babel.min.js"></script>
 <!--引入prop-types,用于对组件标签属性进行限制-->
-<script type="text/javascript" src="../js/prop-types.js"></script>
+<script type="text/javascript" src="../js/react-17.0.1/prop-types.js"></script>
 
 <script type="text/babel">
-  /*
-  * 生命周期的三个阶段（旧）
-    1. 初始化阶段: 由ReactDOM.render()触发---初次渲染
-        1.constructor()
-        2.componentWillMount()
-        3.render()
-        4.componentDidMount() === 常用
-             一般在这个狗子中做一些初始化的事情：开启定时器 发送网络请求  订阅消息
-    2. 更新阶段: 由组件内部this.setSate()或父组件重新render触发
-        1.shouldComponentUpdate()
-        2.componentWillUpdate()
-        3.render()
-        4.componentDidUpdate()
-    3. 卸载组件: 由ReactDOM.unmountComponentAtNode()触发
-        1.componentWillUnmount()  ==== 常用
-             一般在这个钩子中做一些收尾的事情，例如：关闭定时器，取消订阅消息
-  * */
-
   // 创建组件
   class Count extends React.Component {
+    // 构造器
     constructor(props) {
       console.log('count-counstructor')
       super(props)
@@ -46,6 +28,7 @@
         count: 0
       }
     }
+    // 加1按钮的回调
     add = () => {
       let {count} = this.state
       count += 1
@@ -53,6 +36,7 @@
         count
       })
     }
+    // 卸载组件回调
     handleUnmount = () => {
       ReactDOM.unmountComponentAtNode(document.getElementById('test'))
     }
@@ -60,14 +44,15 @@
     handleForce = () => {
       this.forceUpdate()
     }
-    componentWillMount() {
+    // 组件将要挂载
+    UNSAFE_componentWillMount() {
       console.log('count-componentWillMount')
     }
     // 组件挂载完毕调用
     componentDidMount() {
       console.log('count-componentDidMount')
     }
-    // 组件将要挂载
+    // 组件将要卸载
     componentWillUnmount() {
       console.log('count-componentWillUnmount')
     }
@@ -77,7 +62,7 @@
       return true
     }
     // 组件将要更新
-    componentWillUpdate() {
+    UNSAFE_componentWillUpdate() {
       console.log('count-componentWillUpdate')
     }
     // 组件更新完毕
@@ -121,24 +106,9 @@
   }
   // 子组件B
   class B extends React.Component {
-    componentDidMount() {
-      console.log('B----componentDidMount')
-    }
     // 组件将要接收新的props
-    componentWillReceiveProps(props) {
+    UNSAFE_componentWillReceiveProps(props) {
       console.log('B组件将要接收props---componentWillReceiveProps', props)
-    }
-    shouldComponentUpdate() {
-      console.log('B---shouldComponentUpdate')
-      return true
-    }
-    componentWillUpdate() {
-      console.log('B---componentWillUpdate')
-      return true
-    }
-    componentDidUpdate() {
-      console.log('B---componentDidUpdate')
-      return true
     }
     render() {
       console.log('B---render')
