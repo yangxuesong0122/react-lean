@@ -44,9 +44,16 @@
     handleForce = () => {
       this.forceUpdate()
     }
-    // 组件将要挂载
-    UNSAFE_componentWillMount() {
-      console.log('count-componentWillMount')
+
+    // 如果state的值在任何时候都取决于props，那么可以使用
+    static getDerivedStateFromProps(props, state) {
+      console.log('count-getDerivedStateFromProps', props, state)
+      return null
+    }
+    // 在更新之前获取快照
+    getSnapshotBeforeUpdate() {
+      console.log('getSnapshotBeforeUpdate')
+      return '杨雪松'
     }
     // 组件挂载完毕调用
     componentDidMount() {
@@ -61,13 +68,9 @@
       console.log('count-shouldComponentUpdate')
       return true
     }
-    // 组件将要更新
-    UNSAFE_componentWillUpdate() {
-      console.log('count-componentWillUpdate')
-    }
     // 组件更新完毕
-    componentDidUpdate() {
-      console.log('count-componentDidUpdate')
+    componentDidUpdate(preProps, preState, snapshotValue) {
+      console.log('count-componentDidUpdate', preProps, preState, snapshotValue)
     }
     // 初始化渲染，装填更新之后调用
     render() {
@@ -84,41 +87,7 @@
     }
   }
 
-  // 父组件A
-  class A extends React.Component {
-    state = {
-      carName: '奔驰'
-    }
-    changeCar = () => {
-      this.setState({
-        carName: '宝马'
-      })
-    }
-    render() {
-      return (
-        <div>
-          <div>我是A组件</div>
-          <button onClick={this.changeCar}>换车</button>
-          <B carName={this.state.carName}/>
-        </div>
-      )
-    }
-  }
-  // 子组件B
-  class B extends React.Component {
-    // 组件将要接收新的props
-    UNSAFE_componentWillReceiveProps(props) {
-      console.log('B组件将要接收props---componentWillReceiveProps', props)
-    }
-    render() {
-      console.log('B---render')
-      return (
-        <div>我是B组件，接收到的车是{this.props.carName}</div>
-      )
-    }
-  }
-
-  ReactDOM.render(<Count/>, document.getElementById('test'))
+  ReactDOM.render(<Count count={100}/>, document.getElementById('test'))
 </script>
 </body>
 </html>
