@@ -32,6 +32,7 @@
     render() {
       return (
         <div>
+          <!--把当前节点放在组件实例对象自身上，为input1-->
           <input ref={currentNode => this.input1 = currentNode } type="text" placeholder="点击按钮提示数据"/>
           <button onClick={this.showData}>点我提示左侧数据</button>
           <input ref={c => this.input2 = c } onBlur={this.showData2} type="text" placeholder="失去焦点提示数据"/>
