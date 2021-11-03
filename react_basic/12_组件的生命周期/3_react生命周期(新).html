@@ -46,8 +46,10 @@
     }
 
     // 如果state的值在任何时候都取决于props，那么可以使用
+    // 获取派生的状态从props中
     static getDerivedStateFromProps(props, state) {
       console.log('count-getDerivedStateFromProps', props, state)
+      // 必须返回一个状态对象或者null
       return null
     }
     // 在更新之前获取快照
