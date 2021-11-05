@@ -9,7 +9,7 @@
     * index.html 主页面
   + src 源码文件夹
     * index.js 入口文件
-    * App.js App组件
+    * App.jsx App组件
     * ronots.txt 爬虫协议文件
     * manifest.json 应用加壳的配置文件
 - 组件化编码流程
