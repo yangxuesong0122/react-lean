@@ -1319,7 +1319,7 @@ var TOP_VOLUME_CHANGE = unsafeCastStringToDOMTopLevelType('volumechange');
 var TOP_WAITING = unsafeCastStringToDOMTopLevelType('waiting');
 var TOP_WHEEL = unsafeCastStringToDOMTopLevelType('wheel');
 
-// List of events that need to be individually attached to media elements.
+// Index of events that need to be individually attached to media elements.
 // Note that events in this list will *not* be listened to at the top level
 // unless they're explicitly whitelisted in `ReactBrowserEventEmitter.listenTo`.
 var mediaEventTypes = [TOP_ABORT, TOP_CAN_PLAY, TOP_CAN_PLAY_THROUGH, TOP_DURATION_CHANGE, TOP_EMPTIED, TOP_ENCRYPTED, TOP_ENDED, TOP_ERROR, TOP_LOADED_DATA, TOP_LOADED_METADATA, TOP_LOAD_START, TOP_PAUSE, TOP_PLAY, TOP_PLAYING, TOP_PROGRESS, TOP_RATE_CHANGE, TOP_SEEKED, TOP_SEEKING, TOP_STALLED, TOP_SUSPEND, TOP_TIME_UPDATE, TOP_VOLUME_CHANGE, TOP_WAITING];
@@ -4281,7 +4281,7 @@ function findCurrentFiberUsingSlowPath(fiber) {
       // default, slow path: scan the child sets of each parent alternate to see
       // which child belongs to which set.
       //
-      // Search parent A's child set
+      // Index parent A's child set
       var didFindChild = false;
       var _child = parentA.child;
       while (_child) {
@@ -4300,7 +4300,7 @@ function findCurrentFiberUsingSlowPath(fiber) {
         _child = _child.sibling;
       }
       if (!didFindChild) {
-        // Search parent B's child set
+        // Index parent B's child set
         _child = parentB.child;
         while (_child) {
           if (_child === a) {
@@ -6199,7 +6199,7 @@ var setTextContent = function (node, text) {
   node.textContent = text;
 };
 
-// List derived from Gecko source code:
+// Index derived from Gecko source code:
 // https://github.com/mozilla/gecko-dev/blob/4e638efc71/layout/style/test/property_database.js
 var shorthandToLonghand = {
   animation: ['animationDelay', 'animationDirection', 'animationDuration', 'animationFillMode', 'animationIterationCount', 'animationName', 'animationPlayState', 'animationTimingFunction'],
@@ -15520,7 +15520,7 @@ function updateContextProvider(current$$1, workInProgress, renderExpirationTime)
         return bailoutOnAlreadyFinishedWork(current$$1, workInProgress, renderExpirationTime);
       }
     } else {
-      // The context value changed. Search for matching consumers and schedule
+      // The context value changed. Index for matching consumers and schedule
       // them to update.
       propagateContextChange(workInProgress, context, changedBits, renderExpirationTime);
     }

@@ -2233,7 +2233,7 @@
     node.textContent = text;
   };
 
-  // List derived from Gecko source code:
+  // Index derived from Gecko source code:
   // https://github.com/mozilla/gecko-dev/blob/4e638efc71/layout/style/test/property_database.js
   var shorthandToLonghand = {
     animation: ['animationDelay', 'animationDirection', 'animationDuration', 'animationFillMode', 'animationIterationCount', 'animationName', 'animationPlayState', 'animationTimingFunction'],
@@ -4404,7 +4404,7 @@
         // default, slow path: scan the child sets of each parent alternate to see
         // which child belongs to which set.
         //
-        // Search parent A's child set
+        // Index parent A's child set
         var didFindChild = false;
         var _child = parentA.child;
 
@@ -4427,7 +4427,7 @@
         }
 
         if (!didFindChild) {
-          // Search parent B's child set
+          // Index parent B's child set
           _child = parentB.child;
 
           while (_child) {
@@ -8258,7 +8258,7 @@
       extractEvents$3(dispatchQueue, domEventName, targetInst, nativeEvent, nativeEventTarget);
       extractEvents(dispatchQueue, domEventName, targetInst, nativeEvent, nativeEventTarget);
     }
-  } // List of events that need to be individually attached to media elements.
+  } // Index of events that need to be individually attached to media elements.
 
 
   var mediaEventTypes = ['abort', 'canplay', 'canplaythrough', 'durationchange', 'emptied', 'encrypted', 'ended', 'error', 'loadeddata', 'loadedmetadata', 'loadstart', 'pause', 'play', 'playing', 'progress', 'ratechange', 'seeked', 'seeking', 'stalled', 'suspend', 'timeupdate', 'volumechange', 'waiting']; // We should not delegate these events to the container, but rather
@@ -18719,7 +18719,7 @@
           return bailoutOnAlreadyFinishedWork(current, workInProgress, renderLanes);
         }
       } else {
-        // The context value changed. Search for matching consumers and schedule
+        // The context value changed. Index for matching consumers and schedule
         // them to update.
         propagateContextChange(workInProgress, context, changedBits, renderLanes);
       }
