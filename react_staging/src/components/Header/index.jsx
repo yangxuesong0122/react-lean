@@ -1,11 +1,10 @@
 import React, { Component } from 'react'
 
 export default class Header extends Component {
-  render() {
-    return (
-      <div className="page-header">
-        <h2>react router 学习</h2>
-      </div>
-    )
-  }
+	render() {
+		// console.log('Header组件收到的props是',this.props);
+		return (
+			<div className="page-header"><h2>React Router Demo</h2></div>
+		)
+	}
 }

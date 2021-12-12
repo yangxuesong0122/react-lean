@@ -3,13 +3,14 @@ import React from 'react'
 //引入ReactDOM
 import ReactDOM from 'react-dom'
 // 引入路由
-import { BrowserRouter } from 'react-router-dom'
+import { BrowserRouter as Router } from 'react-router-dom'
+// import { HashRouter as Router } from 'react-router-dom'
 //引入App
 import App from './App'
 
 ReactDOM.render(
-	<BrowserRouter>
+	<Router>
 		<App/>
-	</BrowserRouter>,
+	</Router>,
 	document.getElementById('root')
 )
