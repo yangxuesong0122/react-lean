@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-import { Route, Switch } from 'react-router-dom'
+import { Route } from 'react-router-dom'
 import Home from './pages/Home' // Home 是路由组件
 import About from './pages/About'
-import Test from './pages/Test'
 import Header from "./components/Header" // Header是一般组件
 import MyNavLink from './components/MyNavLink'
 
@@ -34,12 +33,8 @@ export default class App extends Component {
 							<div className="panel-body">
 								{/* 注册路由 */}
 								{/* 旧版本写法：*/}
-								<Switch>
-									<Route path="/about" component={About}/>
-									<Route path="/home" component={Home}/>
-									<Route path="/home" component={Test}/>
-								</Switch>
-
+								<Route path="/about" component={About}/>
+								<Route path="/home" component={Home}/>
 								{/* 新版本写法 Route 需要在 Routes 里，组件为 element,注意括号内为标签 */}
 								{/*<Routes>
 									<Route path="/about" element={<About/>}/>
