@@ -25,8 +25,8 @@ export default class App extends Component {
 							{/* 在React中靠路由链接实现切换组件--编写路由链接 */}
 							{/*<NavLink activeClassName="height-like" className="list-group-item" to="/about">About</NavLink>
 							<NavLink activeClassName="height-like" className="list-group-item" to="/home">Home</NavLink>*/}
-							<MyNavLink to='/about'>About</MyNavLink>
-							<MyNavLink to='/home/a'>Home</MyNavLink>
+							<MyNavLink to='/yxs/about'>About</MyNavLink>
+							<MyNavLink to='/yxs/home'>Home</MyNavLink>
 						</div>
 					</div>
 					<div className="col-xs-6">
@@ -34,11 +34,8 @@ export default class App extends Component {
 							<div className="panel-body">
 								{/* 注册路由 */}
 								{/* 旧版本写法：*/}
-								<Switch>
-									{/* exact 精准品配 */}
-									<Route exact path="/about" component={About}/>
-									<Route exact path="/home" component={Home}/>
-								</Switch>
+								<Route path="/yxs/about" component={About}/>
+								<Route path="/yxs/home" component={Home}/>
 
 								{/* 新版本写法 Route 需要在 Routes 里，组件为 element,注意括号内为标签 */}
 								{/*<Routes>
