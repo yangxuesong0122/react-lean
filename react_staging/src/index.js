@@ -1,11 +1,13 @@
 import React from 'react'
 import ReactDom from 'react-dom'
 import App from './App'
-// 用于获取redux中保存的状态
 import store from './redux/store'
+import {Provider} from 'react-redux'
 
-ReactDom.render(<App/>, document.getElementById('root'))
-// 监测redux中状态的变化，只要变化，就调用 render
-store.subscribe(() => {
-  ReactDom.render(<App/>, document.getElementById('root'))
-})
+ReactDom.render(
+  /* 此处需要用Provider包裹App，目的是让App所有的后代容器组件都能接收到store */
+  <Provider store={store}>
+    <App/>
+  </Provider>,
+  document.getElementById('root')
+)
