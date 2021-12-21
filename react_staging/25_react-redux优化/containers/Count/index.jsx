@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 // 引入connect用于连接UI组件与redux
 import { connect } from 'react-redux'
-import { createIncrementAction, createDecrementAction, createIncrementAsyncAction } from '../../redux/actions/count'
+import { createIncrementAction, createDecrementAction, createIncrementAsyncAction } from '../../redux/count_action'
 
 // 定义UI组件
 class Count extends Component {
@@ -28,10 +28,10 @@ class Count extends Component {
     this.props.asyncJia(value*1, 500)
   }
   render() {
+    console.log(this.props)
     return (
       <div>
-        <h2>我是count组件,下方组件的总人数为：{this.props.personList.length}</h2>
-        <h4>当前求和为: {this.props.sum}</h4>
+        <h2>当前求和为: {this.props.sum}</h2>
         <select ref={c => this.selectNum = c}>
           <option value='1'>1</option>
           <option value='2'>2</option>
@@ -47,7 +47,7 @@ class Count extends Component {
 }
 
 export default connect(
-  state => ({ sum: state.he, personList: state.rens }),
+  state => ({ sum: state }),
   // mapDispatchToProps的一般写法
   // dispatch => ({
   //   jia: (data) => {
