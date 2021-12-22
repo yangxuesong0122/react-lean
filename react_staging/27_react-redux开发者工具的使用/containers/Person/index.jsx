@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {nanoid} from 'nanoid'
 // 引入connect用于连接UI组件与redux
 import { connect } from 'react-redux'
-import { addPerson } from '../../redux/actions/person'
+import { createAddPersonAction } from '../../redux/actions/person'
 
 class Person extends Component {
   addPerson = () => {
@@ -13,7 +13,7 @@ class Person extends Component {
       name,
       age
     }
-    this.props.addPerson(personObj)
+    this.props.addPersonFunc(personObj)
     this.inputName.value = ''
     this.inputAge.value = ''
   }
@@ -38,8 +38,8 @@ class Person extends Component {
 }
 
 export default connect(
-  state => ({ sum: state.count, personList: state.persons }), // 映射状态
+  state => ({ sum: state.he, personList: state.rens }), // 映射状态
   { // 映射操作状态的方法
-    addPerson
+    addPersonFunc: createAddPersonAction
   }
 )(Person)

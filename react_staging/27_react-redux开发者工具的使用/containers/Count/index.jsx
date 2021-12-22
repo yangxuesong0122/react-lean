@@ -1,11 +1,7 @@
 import React, {Component} from 'react'
 // 引入connect用于连接UI组件与redux
 import { connect } from 'react-redux'
-import {
-  increment,
-  decrement,
-  incrementAsync
-} from '../../redux/actions/count'
+import { createIncrementAction, createDecrementAction, createIncrementAsyncAction } from '../../redux/actions/count'
 
 // 定义UI组件
 class Count extends Component {
@@ -15,21 +11,21 @@ class Count extends Component {
 
   increment = () => {
     const {value} = this.selectNum
-    this.props.increment(value*1)
+    this.props.jia(value*1)
   }
   decrement = () => {
     const {value} = this.selectNum
-    this.props.decrement(value*1)
+    this.props.jian(value*1)
   }
   incrementIfOdd = () => {
     const {value} = this.selectNum
     if (this.props.sum % 2 !== 0) {
-      this.props.increment(value*1)
+      this.props.jia(value*1)
     }
   }
   incrementAsync = () => {
     const {value} = this.selectNum
-    this.props.incrementAsync(value*1, 500)
+    this.props.asyncJia(value*1, 500)
   }
   render() {
     return (
@@ -51,7 +47,7 @@ class Count extends Component {
 }
 
 export default connect(
-  state => ({ sum: state.count, personList: state.persons }),
+  state => ({ sum: state.he, personList: state.rens }),
   // mapDispatchToProps的一般写法
   // dispatch => ({
   //   jia: (data) => {
@@ -65,8 +61,8 @@ export default connect(
   // mapDispatchToProps的简写
   // react-redux 帮我们自动分发（dispatch）
   {
-    increment,
-    decrement,
-    incrementAsync
+    jia: createIncrementAction,
+    jian: createDecrementAction,
+    asyncJia: createIncrementAsyncAction
   }
 )(Count)
