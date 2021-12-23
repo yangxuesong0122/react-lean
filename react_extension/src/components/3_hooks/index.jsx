@@ -6,12 +6,12 @@ import ReactDOM from 'react-dom'
 	state = { count: 0 }
 	myRef = React.createRef()
 	add = () => {
-		this.setState(state => ({count: state.count+1}))
+		this.setState(state => ({count: state.count + 1}))
 	}
 	unmount = () => {
 		ReactDOM.unmountComponentAtNode(document.getElementById('root'))
 	}
-	show = () =>{
+	show = () => {
 		alert(this.myRef.current.value)
 	}
 	componentDidMount() {
