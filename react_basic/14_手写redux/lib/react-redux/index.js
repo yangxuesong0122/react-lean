@@ -21,7 +21,6 @@ react-redux库的主模块
 通过context向所有的容器组件提供store
  */
 export class Provider extends React.Component {
-
   static propTypes = {
     store: PropTypes.object.isRequired  // 声明接收store
   }
@@ -56,7 +55,6 @@ export function connect(mapStateToProps, mapDispatchToProps) {
   return (UIComponent) => {
     // 返回容器组件
     return class ContainerComponent extends React.Component {
-
       // 声明接收的context数据的名称和类型
       static contextTypes = {
         store: PropTypes.object
@@ -75,7 +73,7 @@ export function connect(mapStateToProps, mapDispatchToProps) {
 
         //得到包含所有函数属性的对象
         let dispatchProps
-        if(typeof mapDispatchToProps==='function') {
+        if(typeof mapDispatchToProps === 'function') {
           dispatchProps = mapDispatchToProps(store.dispatch)
         } else {
           dispatchProps = Object.keys(mapDispatchToProps).reduce((pre, key) => {
@@ -100,7 +98,6 @@ export function connect(mapStateToProps, mapDispatchToProps) {
         return <UIComponent  {...this.state} {...this.dispatchProps}/>
       }
     }
-
   }
 }
 
